@@ -1,3 +1,6 @@
 [submodule "src/cakephp"]
 	path = src/cakephp
 	url = git@github.com:euonymus/ar_api.git
+[submodule "src/secrets"]
+	path = src/secrets
+	url = git@bitbucket.org:dg_ar/ar_api_secrets.git
