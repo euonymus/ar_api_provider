@@ -6,3 +6,6 @@
 	path = src/secrets
 	url = git@bitbucket.org:dg_ar/ar_api_secrets.git
 	ignore = dirty
+[submodule "chef"]
+	path = chef
+	url = git@github.com:euonymus/ar_api_chef.git
