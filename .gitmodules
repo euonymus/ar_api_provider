@@ -1,5 +1,5 @@
 [submodule "src/cakephp"]
-	path = src/cakephp
+	path = src/lampapp
 	url = git@github.com:euonymus/ar_api.git
 	ignore = dirty
 [submodule "src/secrets"]
