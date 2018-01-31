@@ -98,8 +98,8 @@ Vagrant.configure("2") do |config|
       recipe[apache2::mod_ssl]
       recipe[apache2::mod_vhost_alias]
       recipe[postfix]
+      recipe[lamp]
     ]
-      # recipe[lamp]
       # recipe[ar_api]
       # recipe[iptables]
 
