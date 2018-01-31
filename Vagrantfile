@@ -99,6 +99,7 @@ Vagrant.configure("2") do |config|
       recipe[apache2::mod_vhost_alias]
       recipe[postfix]
       recipe[lamp]
+      recipe[cakephp]
     ]
       # recipe[ar_api]
       # recipe[iptables]
