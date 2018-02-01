@@ -100,8 +100,8 @@ Vagrant.configure("2") do |config|
       recipe[postfix]
       recipe[lamp]
       recipe[cakephp]
+      recipe[ar_api]
     ]
-      # recipe[ar_api]
       # recipe[iptables]
 
     # Put iptables to the above, if you want to
