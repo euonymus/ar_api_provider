@@ -9,3 +9,4 @@
 [submodule "chef"]
 	path = chef
 	url = git@github.com:euonymus/ar_api_chef.git
+	ignore = dirty
