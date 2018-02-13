@@ -14,30 +14,34 @@ Vagrant.configure("2") do |config|
 
   # # Every Vagrant development environment requires a box. You can search for
   # # boxes at https://atlas.hashicorp.com/search.
-  # config.vm.box = "ubuntu14_04_x64"
-  # config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.box = "ubuntu16_04_x64"
 
-  # config.vm.synced_folder "./src/cakephp", "/var/www/cakephp", id: "vagrant-root",
-  #   owner: "www-data",
-  #   group: "www-data",
-  #   #mount_options: ["dmode=775,fmode=664"]
-  #   mount_options: ["dmode=775"]
-
-  config.vm.provider 'digital_ocean' do |vb, ovr|
-    ovr.ssh.private_key_path = PRIVATE_KEY_PATH
-    ovr.ssh.username = USERNAME
-    ovr.vm.box = "digital_ocean"
-    ovr.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
-    ovr.nfs.functional = false
-    ovr.vm.hostname = HOSTNAME
-
-    vb.token = TOKEN
-    vb.ssh_key_name = SSH_KEYNAME
-    vb.image = 'ubuntu-16-04-x64'
-    vb.region = 'sgp1'
-    vb.size = 's-1vcpu-1gb'
+  config.vm.provider "virtualbox" do |vb|
+     vb.customize [ "modifyvm", :id, "--uartmode1", "disconnected" ]
   end
-  ENV['VAGRANT_DEFAULT_PROVIDER'] = 'digital_ocean'
+
+  config.vm.network "private_network", ip: "192.168.33.10"
+
+  config.vm.synced_folder "./src/lampapp", "/var/www/lampapp", id: "vagrant-root",
+    owner: "www-data",
+    group: "www-data",
+    mount_options: ["dmode=775"]
+
+  # config.vm.provider 'digital_ocean' do |vb, ovr|
+  #   ovr.ssh.private_key_path = PRIVATE_KEY_PATH
+  #   ovr.ssh.username = USERNAME
+  #   ovr.vm.box = "digital_ocean"
+  #   ovr.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
+  #   ovr.nfs.functional = false
+  #   ovr.vm.hostname = HOSTNAME
+
+  #   vb.token = TOKEN
+  #   vb.ssh_key_name = SSH_KEYNAME
+  #   vb.image = 'ubuntu-16-04-x64'
+  #   vb.region = 'sgp1'
+  #   vb.size = 's-1vcpu-1gb'
+  # end
+  # ENV['VAGRANT_DEFAULT_PROVIDER'] = 'digital_ocean'
 
 
   # Disable automatic box update checking. If you disable this, then
