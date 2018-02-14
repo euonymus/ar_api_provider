@@ -23,21 +23,24 @@ Vagrant.configure("2") do |config|
   #   #mount_options: ["dmode=775,fmode=664"]
   #   mount_options: ["dmode=775"]
 
-  config.vm.provider 'digital_ocean' do |vb, ovr|
+  config.vm.box = "dummy"
+
+  config.vm.provider :aws do |aws, ovr|
     ovr.ssh.private_key_path = PRIVATE_KEY_PATH
     ovr.ssh.username = USERNAME
-    ovr.vm.box = "digital_ocean"
-    ovr.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
-    ovr.nfs.functional = false
     ovr.vm.hostname = HOSTNAME
 
-    vb.token = TOKEN
-    vb.ssh_key_name = SSH_KEYNAME
-    vb.image = 'ubuntu-16-04-x64'
-    vb.region = 'sgp1'
-    vb.size = 's-1vcpu-1gb'
+    aws.access_key_id = ACCESS_KEY_ID
+    aws.secret_access_key = SECRET_ACCESS_KEY
+    aws.keypair_name = SSH_KEYNAME
+    aws.ami = 'ami-0def3275'
+
+    #config.ssh.pty=true
+    aws.user_data =<<USER_DATA
+#!/bin/sh
+sed -i -e 's/^\\(Defaults.*requiretty\\)/#\\1/' /etc/sudoers
+USER_DATA
   end
-  ENV['VAGRANT_DEFAULT_PROVIDER'] = 'digital_ocean'
 
 
   # Disable automatic box update checking. If you disable this, then
