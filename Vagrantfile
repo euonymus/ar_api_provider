@@ -25,14 +25,15 @@ Vagrant.configure("2") do |config|
 
   config.vm.box = "dummy"
 
-  config.vm.provider :aws do |aws, ovr|
-    ovr.ssh.private_key_path = PRIVATE_KEY_PATH
-    ovr.ssh.username = USERNAME
-    ovr.vm.hostname = HOSTNAME
+  config.vm.provider :aws do |aws, override|
+    override.ssh.private_key_path = PRIVATE_KEY_PATH
+    override.ssh.username = USERNAME
+    override.vm.hostname = HOSTNAME
 
     aws.access_key_id = ACCESS_KEY_ID
     aws.secret_access_key = SECRET_ACCESS_KEY
     aws.keypair_name = SSH_KEYNAME
+    # aws.security_groups = ''
     aws.ami = 'ami-0def3275'
 
     #config.ssh.pty=true
@@ -41,6 +42,7 @@ Vagrant.configure("2") do |config|
 sed -i -e 's/^\\(Defaults.*requiretty\\)/#\\1/' /etc/sudoers
 USER_DATA
   end
+  ENV['VAGRANT_DEFAULT_PROVIDER'] = 'aws'
 
 
   # Disable automatic box update checking. If you disable this, then
