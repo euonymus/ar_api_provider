@@ -31,48 +31,31 @@ Vagrant.configure("2") do |config|
     # AWS認証情報
     aws.access_key_id = ACCESS_KEY_ID
     aws.secret_access_key = SECRET_ACCESS_KEY
+
+    # region dependents
+    aws.region = "ap-northeast-1"
+    # aws.availability_zone  = "ap-northeast-1a"
     aws.keypair_name = SSH_KEYNAME
 
-    # Amazon Linux AMI 2015.09 (HVM), SSD Volume Type を使用
-    # awsコンソール -> インスタンスの作成 -> 「ステップ 1: Amazon マシンイメージ（AMI）」より
-    # aws.ami = 'ami-31cdba57'
+    # VPC settings
+    aws.security_groups = AWS_SECURITY_GROUP
+    aws.subnet_id = SUBNET_ID
+    # local IP address of VPC
+    #aws.private_ip_address = '192.168.0.33'
+    # 自動的にEIPを割り当てる場合（EIPの取得上限は5個のためそれ以上の指定はエラーとなる）
+    aws.elastic_ip = true
+    aws.associate_public_ip = true
+
+    # machine settings
+    aws.tags = {
+      "Name"        => HOSTNAME,
+      "Description" => "prism API",
+    }
     aws.ami = 'ami-adceb9cb'
-
-    # aws.ami = 'ami-0def3275'
-    # aws.ami = "ami-9a2fb89a"
-
+    # aws.ami = 'ami-31cdba57'
     aws.instance_type          = "t2.micro"
     aws.instance_ready_timeout = 120
     aws.terminate_on_shutdown  = false
-
-    # # ここからはVPCを使用する際の設定
-    # # サブネットID（マネジメントコンソールから取得）
-    # aws.subnet_id = 'サブネットID'
-    # # VPC内のローカルIPアドレスを指定
-    # #aws.private_ip_address = '192.168.0.33'
-    # # 自動的にEIPを割り当てる場合（EIPの取得上限は5個のためそれ以上の指定はエラーとなる）
-    # aws.elastic_ip = true
-
-
-
-    aws.security_groups = AWS_SECURITY_GROUP
-    # aws.security_groups = ['prism']
-
-
-
-
-    aws.region = "ap-northeast-1"
-    # aws.region = "us-west-2"
-    # aws.availability_zone  = "ap-northeast-1a"
-    aws.tags = {
-      "Name"        => "prism",
-      "Description" => "prism API",
-    }
-
-    # eipの自動割当
-    # aws.associate_public_ip = true
-    # aws.elastic_ip = true
-    # aws.subnet_id = "subnet-bdbfa9db"
 
     # ssh設定
     override.ssh.username = USERNAME
@@ -83,8 +66,6 @@ Vagrant.configure("2") do |config|
         #!/bin/sh
         sed -i -e 's/^\\(Defaults.*requiretty\\)/#\\1/' /etc/sudoers
       USER_DATA
-
-    # override.vm.hostname = HOSTNAME
   end
   # ENV['VAGRANT_DEFAULT_PROVIDER'] = 'aws'
 
