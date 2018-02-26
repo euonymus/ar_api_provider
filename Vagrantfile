@@ -24,41 +24,40 @@ Vagrant.configure("2") do |config|
   #   #mount_options: ["dmode=775,fmode=664"]
   #   mount_options: ["dmode=775"]
 
-  config.vm.box = "dummy"
+  config.vm.box     = "dummy"
   config.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
 
   config.vm.provider :aws do |aws, override|
     # AWS認証情報
-    aws.access_key_id = ACCESS_KEY_ID
-    aws.secret_access_key = SECRET_ACCESS_KEY
+    aws.access_key_id             = ACCESS_KEY_ID
+    aws.secret_access_key         = SECRET_ACCESS_KEY
 
     # region dependents
-    aws.region = "ap-northeast-1"
-    # aws.availability_zone  = "ap-northeast-1a"
-    aws.keypair_name = SSH_KEYNAME
+    aws.region                    = REGION_ID
+    aws.availability_zone         = AVAILABILITY_ZONE
+    aws.keypair_name              = SSH_KEYNAME
 
     # VPC settings
-    aws.security_groups = AWS_SECURITY_GROUP
-    aws.subnet_id = SUBNET_ID
+    aws.security_groups           = AWS_SECURITY_GROUP
+    aws.subnet_id                 = SUBNET_ID
     # local IP address of VPC
     #aws.private_ip_address = '192.168.0.33'
     # 自動的にEIPを割り当てる場合（EIPの取得上限は5個のためそれ以上の指定はエラーとなる）
-    aws.elastic_ip = true
-    aws.associate_public_ip = true
+    # aws.elastic_ip = true
+    aws.associate_public_ip       = true
 
     # machine settings
     aws.tags = {
       "Name"        => HOSTNAME,
       "Description" => "prism API",
     }
-    aws.ami = 'ami-adceb9cb'
-    # aws.ami = 'ami-31cdba57'
-    aws.instance_type          = "t2.micro"
-    aws.instance_ready_timeout = 120
-    aws.terminate_on_shutdown  = false
+    aws.ami                       = AMI_ID
+    aws.instance_type             = INSTANCE_TYPE
+    aws.instance_ready_timeout    = 120
+    aws.terminate_on_shutdown     = false
 
     # ssh設定
-    override.ssh.username = USERNAME
+    override.ssh.username         = USERNAME
     override.ssh.private_key_path = PRIVATE_KEY_PATH
 
     # sudo設定(tty 許可)
