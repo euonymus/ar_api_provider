@@ -129,10 +129,10 @@ Vagrant.configure("2") do |config|
       recipe[apache2::mod_ssl]
       recipe[apache2::mod_vhost_alias]
       recipe[postfix]
-      recipe[lamp]
-      recipe[cakephp]
+      recipe[lampy]
       recipe[ar_api]
     ]
+      # recipe[cakephp]
       # recipe[iptables]
 
     # Put iptables to the above, if you want to
