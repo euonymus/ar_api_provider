@@ -26,6 +26,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.box     = "dummy"
   config.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
+  config.ssh.forward_agent = true
 
   config.vm.provider :aws do |aws, override|
     # AWS認証情報
