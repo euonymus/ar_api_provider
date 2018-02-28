@@ -121,6 +121,7 @@ Vagrant.configure("2") do |config|
       recipe[apt]
       recipe[git]
       recipe[vim]
+      recipe[emacs]
       recipe[apache2]
       recipe[apache2::mod_auth_basic]
       recipe[apache2::mod_rewrite]
