@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
@@ -27,21 +28,50 @@ Vagrant.configure("2") do |config|
     group: "www-data",
     mount_options: ["dmode=775"]
 
-  # config.vm.provider 'digital_ocean' do |vb, ovr|
-  #   ovr.ssh.private_key_path = PRIVATE_KEY_PATH
-  #   ovr.ssh.username = USERNAME
-  #   ovr.vm.box = "digital_ocean"
-  #   ovr.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
-  #   ovr.nfs.functional = false
-  #   ovr.vm.hostname = HOSTNAME
+  # config.vm.box     = "dummy"
+  # config.vm.box_url = "https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box"
+  # config.ssh.forward_agent = true
 
-  #   vb.token = TOKEN
-  #   vb.ssh_key_name = SSH_KEYNAME
-  #   vb.image = 'ubuntu-16-04-x64'
-  #   vb.region = 'sgp1'
-  #   vb.size = 's-1vcpu-1gb'
+  # config.vm.provider :aws do |aws, override|
+  #   # AWS認証情報
+  #   aws.access_key_id             = ACCESS_KEY_ID
+  #   aws.secret_access_key         = SECRET_ACCESS_KEY
+
+  #   # region dependents
+  #   aws.region                    = REGION_ID
+  #   aws.availability_zone         = AVAILABILITY_ZONE
+  #   aws.keypair_name              = SSH_KEYNAME
+
+  #   # VPC settings
+  #   aws.security_groups           = AWS_SECURITY_GROUP
+  #   aws.subnet_id                 = SUBNET_ID
+  #   # local IP address of VPC
+  #   #aws.private_ip_address = '192.168.0.33'
+  #   # 自動的にEIPを割り当てる場合（EIPの取得上限は5個のためそれ以上の指定はエラーとなる）
+  #   aws.elastic_ip                = ELASTIC_IP
+  #   aws.associate_public_ip       = true
+
+  #   # machine settings
+  #   aws.tags = {
+  #     "Name"        => HOSTNAME,
+  #     "Description" => "prism API",
+  #   }
+  #   aws.ami                       = AMI_ID
+  #   aws.instance_type             = INSTANCE_TYPE
+  #   aws.instance_ready_timeout    = 120
+  #   aws.terminate_on_shutdown     = false
+
+  #   # ssh設定
+  #   override.ssh.username         = USERNAME
+  #   override.ssh.private_key_path = PRIVATE_KEY_PATH
+
+  #   # sudo設定(tty 許可)
+  #    aws.user_data = <<-USER_DATA
+  #       #!/bin/sh
+  #       sed -i -e 's/^\\(Defaults.*requiretty\\)/#\\1/' /etc/sudoers
+  #     USER_DATA
   # end
-  # ENV['VAGRANT_DEFAULT_PROVIDER'] = 'digital_ocean'
+  # # ENV['VAGRANT_DEFAULT_PROVIDER'] = 'aws'
 
 
   # Disable automatic box update checking. If you disable this, then
@@ -95,6 +125,7 @@ Vagrant.configure("2") do |config|
       recipe[apt]
       recipe[git]
       recipe[vim]
+      recipe[emacs]
       recipe[apache2]
       recipe[apache2::mod_auth_basic]
       recipe[apache2::mod_rewrite]
@@ -103,10 +134,10 @@ Vagrant.configure("2") do |config|
       recipe[apache2::mod_ssl]
       recipe[apache2::mod_vhost_alias]
       recipe[postfix]
-      recipe[lamp]
-      recipe[cakephp]
+      recipe[lampy]
       recipe[ar_api]
     ]
+      # recipe[cakephp]
       # recipe[iptables]
 
     # Put iptables to the above, if you want to

@@ -1,7 +1,3 @@
-[submodule "src/cakephp"]
-	path = src/lampapp
-	url = git@github.com:euonymus/ar_api.git
-	ignore = dirty
 [submodule "src/secrets"]
 	path = src/secrets
 	url = git@bitbucket.org:dg_ar/ar_api_secrets.git
@@ -10,3 +6,6 @@
 	path = chef
 	url = git@github.com:euonymus/ar_api_chef.git
 	ignore = dirty
+[submodule "src/lampapp"]
+	path = src/lampapp
+	url = git@github.com:DGLab-Realitix/prism.git
