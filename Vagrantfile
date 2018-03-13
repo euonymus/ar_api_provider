@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
@@ -33,7 +32,7 @@ Vagrant.configure("2") do |config|
   # config.ssh.forward_agent = true
 
   # config.vm.provider :aws do |aws, override|
-  #   # AWS認証情報
+  #   # AWS authentication information
   #   aws.access_key_id             = ACCESS_KEY_ID
   #   aws.secret_access_key         = SECRET_ACCESS_KEY
 
@@ -47,7 +46,7 @@ Vagrant.configure("2") do |config|
   #   aws.subnet_id                 = SUBNET_ID
   #   # local IP address of VPC
   #   #aws.private_ip_address = '192.168.0.33'
-  #   # 自動的にEIPを割り当てる場合（EIPの取得上限は5個のためそれ以上の指定はエラーとなる）
+  #   # Note: Max number of EIP is 5. If there are already 5, this will be an error
   #   aws.elastic_ip                = ELASTIC_IP
   #   aws.associate_public_ip       = true
 
@@ -61,11 +60,11 @@ Vagrant.configure("2") do |config|
   #   aws.instance_ready_timeout    = 120
   #   aws.terminate_on_shutdown     = false
 
-  #   # ssh設定
+  #   # ssh
   #   override.ssh.username         = USERNAME
   #   override.ssh.private_key_path = PRIVATE_KEY_PATH
 
-  #   # sudo設定(tty 許可)
+  #   # sudo setting(allow tty)
   #    aws.user_data = <<-USER_DATA
   #       #!/bin/sh
   #       sed -i -e 's/^\\(Defaults.*requiretty\\)/#\\1/' /etc/sudoers
