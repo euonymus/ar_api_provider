@@ -47,6 +47,7 @@ Vagrant.configure("2") do |config|
     # local IP address of VPC
     #aws.private_ip_address = '192.168.0.33'
     # Note: Max number of EIP is 5. If there are already 5, this will be an error
+    aws.private_ip_address        = PRIVATE_IP
     aws.elastic_ip                = ELASTIC_IP
     aws.associate_public_ip       = true
 
